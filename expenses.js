@@ -67,11 +67,12 @@ function deleteUser(Id){
 
 
 function editUser(userId,amt1,cat1,man1){
-   
+   console.log(userId)
+   deleteUser(userId);
     document.getElementById('fname').value=amt1;
     document.getElementById('desc').value=cat1;
     document.getElementById('categ').value=man1;
-    deleteUser(userId);
+   
 
    
 }
