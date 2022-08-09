@@ -1,20 +1,22 @@
 
-document.getElementById("btn").addEventListener("click",addExpense);
+// document.getElementById("btn").addEventListener("click",addExpense);
 
-function addExpense(e){
+function addExpense(event){
     // alert("Helo")
-    e.preventDefault();
-  
+    event.preventDefault();
+    const amt=event.target.fname.value;
+    const cat=event.target.desc.value;
+    const man=event.target.categ.value;
     let exp={
-        amt:document.getElementById("fname").value,
-         cat:document.getElementById("desc").value,
-         man:document.getElementById("categ").value,
+        amt,
+         cat,
+         man
 
 
-    }
+    };
     // localStorage.setItem(exp.amt,JSON.stringify(exp))
     
-    axios.post("https://crudcrud.com/api/48c54af507e049149b79ec0b263bf54a/ExpenseTracker1",exp)
+    axios.post("https://crudcrud.com/api/a66b948db37f47449bde82385685f2dd/ExpenseTracker1",exp)
     .then((response)=>{
         printExpenses(response.data);
         console.log(response) 
@@ -33,7 +35,7 @@ formNODE.innerHTML=formNODE.innerHTML+childNODE;
 }  
 window.addEventListener("DOMContentLoaded",()=>
 {
-   axios.get("https://crudcrud.com/api/48c54af507e049149b79ec0b263bf54a/ExpenseTracker1").then((response)=>{
+   axios.get("https://crudcrud.com/api/a66b948db37f47449bde82385685f2dd/ExpenseTracker1").then((response)=>{
        console.log(response)
        for(var i=0;i<response.data.length;i++){
            printExpenses(response.data[i])
@@ -46,8 +48,8 @@ function deleteUser(Id){
     //    console.log(emailId)
     //     localStorage.removeItem(emailId);
 
-        axios.delete(`https://crudcrud.com/api/48c54af507e049149b79ec0b263bf54a/ExpenseTracker1/${Id}`)
-        .then((response)=>removeUserFromScreen(Id)).catch((err)=>console.log(err))
+        axios.delete(`https://crudcrud.com/api/a66b948db37f47449bde82385685f2dd/ExpenseTracker1/${Id}`)
+        .then(removeUserFromScreen(Id)).catch((err)=>console.log(err))
          //removeUserFromScreen(Id);
 }
     function removeUserFromScreen(expID){
@@ -68,11 +70,11 @@ function deleteUser(Id){
 
 function editUser(userId,amt1,cat1,man1){
    console.log(userId)
-   deleteUser(userId);
+   
     document.getElementById('fname').value=amt1;
     document.getElementById('desc').value=cat1;
     document.getElementById('categ').value=man1;
-   
+    deleteUser(userId);
 
    
 }
